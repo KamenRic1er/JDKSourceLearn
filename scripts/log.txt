@@ -303,3 +303,1223 @@ import sun.reflect.annotation.AnnotationType;
 注: 某些输入文件使用了未经检查或不安全的操作。
 注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
 100 个警告
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:57: 警告: Unsafe是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.Unsafe;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:58: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:59: 警告: ConstantPool是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ConstantPool;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:60: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:61: 警告: ReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ReflectionFactory;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:62: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:63: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:64: 警告: ClassRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ClassRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:65: 警告: MethodRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.MethodRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:66: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:67: 警告: ClassScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.ClassScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:68: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+import sun.security.util.SecurityConstants;
+                        ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AnnotatedElement.java:37: 警告: AnnotationSupport是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationSupport;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AnnotatedElement.java:38: 警告: AnnotationType是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationType;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\ObjectStreamField.java:29: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\ObjectStreamField.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:44: 警告: ASCIICaseInsensitiveComparator是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.ASCIICaseInsensitiveComparator;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:45: 警告: StandardCharsets是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.StandardCharsets;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:46: 警告: ThreadLocalCoders是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.ThreadLocalCoders;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:47: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\AbstractStringBuilder.java:28: 警告: FloatingDecimal是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.FloatingDecimal;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:52: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:53: 警告: BaseLocale是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.BaseLocale;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:54: 警告: InternalLocaleBuilder是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.InternalLocaleBuilder;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:55: 警告: LanguageTag是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LanguageTag;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:56: 警告: LocaleExtensions是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleExtensions;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:57: 警告: LocaleMatcher是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleMatcher;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:58: 警告: LocaleObjectCache是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleObjectCache;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:59: 警告: LocaleSyntaxException是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleSyntaxException;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:60: 警告: LocaleUtils是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleUtils;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:61: 警告: ParseStatus是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.ParseStatus;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Formatter.java:61: 警告: DoubleConsts是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.DoubleConsts;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Formatter.java:62: 警告: FormattedFloatingDecimal是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.FormattedFloatingDecimal;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\OutputStreamWriter.java:30: 警告: StreamEncoder是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.StreamEncoder;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\File.java:38: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Hashtable.java:33: 警告: SharedSecrets是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.SharedSecrets;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:57: 警告: AppContext是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AppContext;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:58: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:59: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor.MouseEventAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:59: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor.MouseEventAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:60: 警告: CausedFocusEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.CausedFocusEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:61: 警告: PeerEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.PeerEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:62: 警告: SunToolkit是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SunToolkit;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:64: 警告: SunDropTargetEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.dnd.SunDropTargetEvent;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:66: 警告: Region是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.pipe.Region;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:68: 警告: GetBooleanAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetBooleanAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:64: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:65: 警告: AppContext是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AppContext;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:66: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:67: 警告: ConstrainableGraphics是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.ConstrainableGraphics;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:68: 警告: SubRegionShowable是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SubRegionShowable;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:69: 警告: SunToolkit是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SunToolkit;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:70: 警告: WindowClosingListener是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.WindowClosingListener;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:71: 警告: CausedFocusEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.CausedFocusEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:72: 警告: EmbeddedFrame是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.EmbeddedFrame;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:73: 警告: SunDropTargetEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.dnd.SunDropTargetEvent;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:74: 警告: CompositionArea是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.im.CompositionArea;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:75: 警告: FontManager是内部专用 API, 可能会在未来发行版中删除
+import sun.font.FontManager;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:76: 警告: FontManagerFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.font.FontManagerFactory;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:77: 警告: SunFontManager是内部专用 API, 可能会在未来发行版中删除
+import sun.font.SunFontManager;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:78: 警告: SunGraphics2D是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.SunGraphics2D;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:79: 警告: Region是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.pipe.Region;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:80: 警告: VSyncedBSManager是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.image.VSyncedBSManager;
+                    ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:83: 警告: RequestFocusController是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.RequestFocusController;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:84: 警告: SunGraphicsEnvironment是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.SunGraphicsEnvironment;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:54: 警告: CompoundEnumeration是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.CompoundEnumeration;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:55: 警告: Resource是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.Resource;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:56: 警告: URLClassPath是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.URLClassPath;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:57: 警告: VM是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.VM;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:58: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:59: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:61: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+import sun.security.util.SecurityConstants;
+                        ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:28: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:29: 警告: ConstructorAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ConstructorAccessor;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:31: 警告: TypeAnnotation是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotation;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:32: 警告: TypeAnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:33: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:34: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:35: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:36: 警告: ConstructorScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.ConstructorScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:31: 警告: AnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:32: 警告: AnnotationSupport是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationSupport;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:33: 警告: TypeAnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:34: 警告: TypeAnnotation是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotation;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:35: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AccessibleObject.java:29: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AccessibleObject.java:30: 警告: ReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ReflectionFactory;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\jar\Attributes.java:39: 警告: ASCIICaseInsensitiveComparator是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.ASCIICaseInsensitiveComparator;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:51: 警告: ParseUtil是内部专用 API, 可能会在未来发行版中删除
+import sun.net.www.ParseUtil;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:52: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:53: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:28: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:29: 警告: MethodAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.MethodAccessor;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:31: 警告: MethodRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.MethodRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:32: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:33: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:34: 警告: MethodScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.MethodScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:35: 警告: AnnotationType是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationType;
+                             ^
+注: 某些输入文件使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+注: 某些输入文件使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+100 个警告
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:57: 警告: Unsafe是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.Unsafe;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:58: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:59: 警告: ConstantPool是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ConstantPool;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:60: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:61: 警告: ReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ReflectionFactory;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:62: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:63: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:64: 警告: ClassRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ClassRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:65: 警告: MethodRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.MethodRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:66: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:67: 警告: ClassScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.ClassScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:68: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+import sun.security.util.SecurityConstants;
+                        ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AnnotatedElement.java:37: 警告: AnnotationSupport是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationSupport;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AnnotatedElement.java:38: 警告: AnnotationType是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationType;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\ObjectStreamField.java:29: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\ObjectStreamField.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:44: 警告: ASCIICaseInsensitiveComparator是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.ASCIICaseInsensitiveComparator;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:45: 警告: StandardCharsets是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.StandardCharsets;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:46: 警告: ThreadLocalCoders是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.ThreadLocalCoders;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:47: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\AbstractStringBuilder.java:28: 警告: FloatingDecimal是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.FloatingDecimal;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:52: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:53: 警告: BaseLocale是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.BaseLocale;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:54: 警告: InternalLocaleBuilder是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.InternalLocaleBuilder;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:55: 警告: LanguageTag是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LanguageTag;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:56: 警告: LocaleExtensions是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleExtensions;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:57: 警告: LocaleMatcher是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleMatcher;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:58: 警告: LocaleObjectCache是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleObjectCache;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:59: 警告: LocaleSyntaxException是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleSyntaxException;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:60: 警告: LocaleUtils是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleUtils;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:61: 警告: ParseStatus是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.ParseStatus;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Formatter.java:61: 警告: DoubleConsts是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.DoubleConsts;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Formatter.java:62: 警告: FormattedFloatingDecimal是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.FormattedFloatingDecimal;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\OutputStreamWriter.java:30: 警告: StreamEncoder是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.StreamEncoder;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\File.java:38: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Hashtable.java:33: 警告: SharedSecrets是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.SharedSecrets;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:57: 警告: AppContext是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AppContext;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:58: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:59: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor.MouseEventAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:59: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor.MouseEventAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:60: 警告: CausedFocusEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.CausedFocusEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:61: 警告: PeerEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.PeerEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:62: 警告: SunToolkit是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SunToolkit;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:64: 警告: SunDropTargetEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.dnd.SunDropTargetEvent;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:66: 警告: Region是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.pipe.Region;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:68: 警告: GetBooleanAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetBooleanAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:64: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:65: 警告: AppContext是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AppContext;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:66: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:67: 警告: ConstrainableGraphics是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.ConstrainableGraphics;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:68: 警告: SubRegionShowable是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SubRegionShowable;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:69: 警告: SunToolkit是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SunToolkit;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:70: 警告: WindowClosingListener是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.WindowClosingListener;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:71: 警告: CausedFocusEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.CausedFocusEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:72: 警告: EmbeddedFrame是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.EmbeddedFrame;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:73: 警告: SunDropTargetEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.dnd.SunDropTargetEvent;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:74: 警告: CompositionArea是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.im.CompositionArea;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:75: 警告: FontManager是内部专用 API, 可能会在未来发行版中删除
+import sun.font.FontManager;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:76: 警告: FontManagerFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.font.FontManagerFactory;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:77: 警告: SunFontManager是内部专用 API, 可能会在未来发行版中删除
+import sun.font.SunFontManager;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:78: 警告: SunGraphics2D是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.SunGraphics2D;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:79: 警告: Region是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.pipe.Region;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:80: 警告: VSyncedBSManager是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.image.VSyncedBSManager;
+                    ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:83: 警告: RequestFocusController是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.RequestFocusController;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:84: 警告: SunGraphicsEnvironment是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.SunGraphicsEnvironment;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:54: 警告: CompoundEnumeration是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.CompoundEnumeration;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:55: 警告: Resource是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.Resource;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:56: 警告: URLClassPath是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.URLClassPath;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:57: 警告: VM是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.VM;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:58: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:59: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:61: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+import sun.security.util.SecurityConstants;
+                        ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:28: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:29: 警告: ConstructorAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ConstructorAccessor;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:31: 警告: TypeAnnotation是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotation;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:32: 警告: TypeAnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:33: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:34: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:35: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:36: 警告: ConstructorScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.ConstructorScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:31: 警告: AnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:32: 警告: AnnotationSupport是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationSupport;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:33: 警告: TypeAnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:34: 警告: TypeAnnotation是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotation;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:35: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AccessibleObject.java:29: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AccessibleObject.java:30: 警告: ReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ReflectionFactory;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\jar\Attributes.java:39: 警告: ASCIICaseInsensitiveComparator是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.ASCIICaseInsensitiveComparator;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:51: 警告: ParseUtil是内部专用 API, 可能会在未来发行版中删除
+import sun.net.www.ParseUtil;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:52: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:53: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:28: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:29: 警告: MethodAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.MethodAccessor;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:31: 警告: MethodRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.MethodRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:32: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:33: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:34: 警告: MethodScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.MethodScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:35: 警告: AnnotationType是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationType;
+                             ^
+注: 某些输入文件使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+注: 某些输入文件使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+100 个警告
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:57: 警告: Unsafe是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.Unsafe;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:58: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:59: 警告: ConstantPool是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ConstantPool;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:60: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:61: 警告: ReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ReflectionFactory;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:62: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:63: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:64: 警告: ClassRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ClassRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:65: 警告: MethodRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.MethodRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:66: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:67: 警告: ClassScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.ClassScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:68: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+import sun.security.util.SecurityConstants;
+                        ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AnnotatedElement.java:37: 警告: AnnotationSupport是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationSupport;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AnnotatedElement.java:38: 警告: AnnotationType是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationType;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\ObjectStreamField.java:29: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\ObjectStreamField.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:44: 警告: ASCIICaseInsensitiveComparator是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.ASCIICaseInsensitiveComparator;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:45: 警告: StandardCharsets是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.StandardCharsets;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:46: 警告: ThreadLocalCoders是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.ThreadLocalCoders;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:47: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\AbstractStringBuilder.java:28: 警告: FloatingDecimal是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.FloatingDecimal;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:52: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:53: 警告: BaseLocale是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.BaseLocale;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:54: 警告: InternalLocaleBuilder是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.InternalLocaleBuilder;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:55: 警告: LanguageTag是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LanguageTag;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:56: 警告: LocaleExtensions是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleExtensions;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:57: 警告: LocaleMatcher是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleMatcher;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:58: 警告: LocaleObjectCache是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleObjectCache;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:59: 警告: LocaleSyntaxException是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleSyntaxException;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:60: 警告: LocaleUtils是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleUtils;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:61: 警告: ParseStatus是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.ParseStatus;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Formatter.java:61: 警告: DoubleConsts是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.DoubleConsts;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Formatter.java:62: 警告: FormattedFloatingDecimal是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.FormattedFloatingDecimal;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\OutputStreamWriter.java:30: 警告: StreamEncoder是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.StreamEncoder;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\File.java:38: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Hashtable.java:33: 警告: SharedSecrets是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.SharedSecrets;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:57: 警告: AppContext是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AppContext;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:58: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:59: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor.MouseEventAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:59: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor.MouseEventAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:60: 警告: CausedFocusEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.CausedFocusEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:61: 警告: PeerEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.PeerEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:62: 警告: SunToolkit是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SunToolkit;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:64: 警告: SunDropTargetEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.dnd.SunDropTargetEvent;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:66: 警告: Region是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.pipe.Region;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:68: 警告: GetBooleanAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetBooleanAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:64: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:65: 警告: AppContext是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AppContext;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:66: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:67: 警告: ConstrainableGraphics是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.ConstrainableGraphics;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:68: 警告: SubRegionShowable是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SubRegionShowable;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:69: 警告: SunToolkit是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SunToolkit;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:70: 警告: WindowClosingListener是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.WindowClosingListener;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:71: 警告: CausedFocusEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.CausedFocusEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:72: 警告: EmbeddedFrame是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.EmbeddedFrame;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:73: 警告: SunDropTargetEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.dnd.SunDropTargetEvent;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:74: 警告: CompositionArea是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.im.CompositionArea;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:75: 警告: FontManager是内部专用 API, 可能会在未来发行版中删除
+import sun.font.FontManager;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:76: 警告: FontManagerFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.font.FontManagerFactory;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:77: 警告: SunFontManager是内部专用 API, 可能会在未来发行版中删除
+import sun.font.SunFontManager;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:78: 警告: SunGraphics2D是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.SunGraphics2D;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:79: 警告: Region是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.pipe.Region;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:80: 警告: VSyncedBSManager是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.image.VSyncedBSManager;
+                    ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:83: 警告: RequestFocusController是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.RequestFocusController;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:84: 警告: SunGraphicsEnvironment是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.SunGraphicsEnvironment;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:54: 警告: CompoundEnumeration是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.CompoundEnumeration;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:55: 警告: Resource是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.Resource;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:56: 警告: URLClassPath是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.URLClassPath;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:57: 警告: VM是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.VM;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:58: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:59: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:61: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+import sun.security.util.SecurityConstants;
+                        ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:28: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:29: 警告: ConstructorAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ConstructorAccessor;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:31: 警告: TypeAnnotation是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotation;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:32: 警告: TypeAnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:33: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:34: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:35: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:36: 警告: ConstructorScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.ConstructorScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:31: 警告: AnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:32: 警告: AnnotationSupport是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationSupport;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:33: 警告: TypeAnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:34: 警告: TypeAnnotation是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotation;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:35: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AccessibleObject.java:29: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AccessibleObject.java:30: 警告: ReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ReflectionFactory;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\jar\Attributes.java:39: 警告: ASCIICaseInsensitiveComparator是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.ASCIICaseInsensitiveComparator;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:51: 警告: ParseUtil是内部专用 API, 可能会在未来发行版中删除
+import sun.net.www.ParseUtil;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:52: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:53: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:28: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:29: 警告: MethodAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.MethodAccessor;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:31: 警告: MethodRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.MethodRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:32: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:33: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:34: 警告: MethodScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.MethodScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:35: 警告: AnnotationType是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationType;
+                             ^
+注: 某些输入文件使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+注: 某些输入文件使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+100 个警告
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:57: 警告: Unsafe是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.Unsafe;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:58: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:59: 警告: ConstantPool是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ConstantPool;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:60: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:61: 警告: ReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ReflectionFactory;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:62: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:63: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:64: 警告: ClassRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ClassRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:65: 警告: MethodRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.MethodRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:66: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:67: 警告: ClassScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.ClassScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Class.java:68: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+import sun.security.util.SecurityConstants;
+                        ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AnnotatedElement.java:37: 警告: AnnotationSupport是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationSupport;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AnnotatedElement.java:38: 警告: AnnotationType是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationType;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\ObjectStreamField.java:29: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\ObjectStreamField.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:44: 警告: ASCIICaseInsensitiveComparator是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.ASCIICaseInsensitiveComparator;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:45: 警告: StandardCharsets是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.StandardCharsets;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:46: 警告: ThreadLocalCoders是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.ThreadLocalCoders;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\nio\charset\Charset.java:47: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\AbstractStringBuilder.java:28: 警告: FloatingDecimal是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.FloatingDecimal;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:52: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:53: 警告: BaseLocale是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.BaseLocale;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:54: 警告: InternalLocaleBuilder是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.InternalLocaleBuilder;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:55: 警告: LanguageTag是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LanguageTag;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:56: 警告: LocaleExtensions是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleExtensions;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:57: 警告: LocaleMatcher是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleMatcher;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:58: 警告: LocaleObjectCache是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleObjectCache;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:59: 警告: LocaleSyntaxException是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleSyntaxException;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:60: 警告: LocaleUtils是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.LocaleUtils;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Locale.java:61: 警告: ParseStatus是内部专用 API, 可能会在未来发行版中删除
+import sun.util.locale.ParseStatus;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Formatter.java:61: 警告: DoubleConsts是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.DoubleConsts;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Formatter.java:62: 警告: FormattedFloatingDecimal是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.FormattedFloatingDecimal;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\OutputStreamWriter.java:30: 警告: StreamEncoder是内部专用 API, 可能会在未来发行版中删除
+import sun.nio.cs.StreamEncoder;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\io\File.java:38: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\Hashtable.java:33: 警告: SharedSecrets是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.SharedSecrets;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:57: 警告: AppContext是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AppContext;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:58: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:59: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor.MouseEventAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:59: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor.MouseEventAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:60: 警告: CausedFocusEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.CausedFocusEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:61: 警告: PeerEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.PeerEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:62: 警告: SunToolkit是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SunToolkit;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:64: 警告: SunDropTargetEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.dnd.SunDropTargetEvent;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:66: 警告: Region是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.pipe.Region;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Container.java:68: 警告: GetBooleanAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetBooleanAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:64: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+import sun.security.action.GetPropertyAction;
+                          ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:65: 警告: AppContext是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AppContext;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:66: 警告: AWTAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.AWTAccessor;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:67: 警告: ConstrainableGraphics是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.ConstrainableGraphics;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:68: 警告: SubRegionShowable是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SubRegionShowable;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:69: 警告: SunToolkit是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.SunToolkit;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:70: 警告: WindowClosingListener是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.WindowClosingListener;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:71: 警告: CausedFocusEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.CausedFocusEvent;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:72: 警告: EmbeddedFrame是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.EmbeddedFrame;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:73: 警告: SunDropTargetEvent是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.dnd.SunDropTargetEvent;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:74: 警告: CompositionArea是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.im.CompositionArea;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:75: 警告: FontManager是内部专用 API, 可能会在未来发行版中删除
+import sun.font.FontManager;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:76: 警告: FontManagerFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.font.FontManagerFactory;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:77: 警告: SunFontManager是内部专用 API, 可能会在未来发行版中删除
+import sun.font.SunFontManager;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:78: 警告: SunGraphics2D是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.SunGraphics2D;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:79: 警告: Region是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.pipe.Region;
+                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:80: 警告: VSyncedBSManager是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.image.VSyncedBSManager;
+                    ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:83: 警告: RequestFocusController是内部专用 API, 可能会在未来发行版中删除
+import sun.awt.RequestFocusController;
+              ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\awt\Component.java:84: 警告: SunGraphicsEnvironment是内部专用 API, 可能会在未来发行版中删除
+import sun.java2d.SunGraphicsEnvironment;
+                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:54: 警告: CompoundEnumeration是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.CompoundEnumeration;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:55: 警告: Resource是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.Resource;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:56: 警告: URLClassPath是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.URLClassPath;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:57: 警告: VM是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.VM;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:58: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:59: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\ClassLoader.java:61: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+import sun.security.util.SecurityConstants;
+                        ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:28: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:29: 警告: ConstructorAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ConstructorAccessor;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:31: 警告: TypeAnnotation是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotation;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:32: 警告: TypeAnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:33: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:34: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:35: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Constructor.java:36: 警告: ConstructorScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.ConstructorScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:31: 警告: AnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:32: 警告: AnnotationSupport是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationSupport;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:33: 警告: TypeAnnotationParser是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotationParser;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:34: 警告: TypeAnnotation是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.TypeAnnotation;
+                             ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Executable.java:35: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.ConstructorRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AccessibleObject.java:29: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\AccessibleObject.java:30: 警告: ReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.ReflectionFactory;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\util\jar\Attributes.java:39: 警告: ASCIICaseInsensitiveComparator是内部专用 API, 可能会在未来发行版中删除
+import sun.misc.ASCIICaseInsensitiveComparator;
+               ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:51: 警告: ParseUtil是内部专用 API, 可能会在未来发行版中删除
+import sun.net.www.ParseUtil;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:52: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\Package.java:53: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:28: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.CallerSensitive;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:29: 警告: MethodAccessor是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.MethodAccessor;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.Reflection;
+                  ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:31: 警告: MethodRepository是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.repository.MethodRepository;
+                                      ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:32: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.CoreReflectionFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:33: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.factory.GenericsFactory;
+                                   ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:34: 警告: MethodScope是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.generics.scope.MethodScope;
+                                 ^
+E:\Java\IDEA_WorkSpace\JDKSourceLearn\src\source\java\lang\reflect\Method.java:35: 警告: AnnotationType是内部专用 API, 可能会在未来发行版中删除
+import sun.reflect.annotation.AnnotationType;
+                             ^
+注: 某些输入文件使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+注: 某些输入文件使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+100 个警告

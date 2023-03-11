@@ -134,9 +134,11 @@ public class CopyOnWriteArrayList<E>
         if (c.getClass() == CopyOnWriteArrayList.class)
             elements = ((CopyOnWriteArrayList<?>)c).getArray();
         else {
+            // 返回一个包含此集合中所有元素的数组。如果此集合对其迭代器返回其元素的顺序做出任何保证，则此方法必须以相同的顺序返回元素。
             elements = c.toArray();
             // c.toArray might (incorrectly) not return Object[] (see 6260652)
             if (elements.getClass() != Object[].class)
+                // 将原类型转换成指定类型（Object类）的对象数组
                 elements = Arrays.copyOf(elements, elements.length, Object[].class);
         }
         setArray(elements);
@@ -381,8 +383,18 @@ public class CopyOnWriteArrayList<E>
         }
     }
 
+    /**
+     * 写时复制存在弱一致性问题，如下：
+     *
+     * 假设List中此时有三个元素（1，2，3），通过下面的代码我们可以知道步骤A和B是没有加锁的
+     * 这个时候如果线程X执行完步骤A，线程Y进行了remove操作（删除元素1），该操作首先会独占锁，然后进行写时复制操作，删除完元素1以后，
+     * 便让array指向新的数组。但是此时线程X引用的仍然是旧的原数组，线程X接下来执行步骤B，得到的仍然是1，但是1实际上已经被线程B删除了，
+     * 这就是写时复制策略存在的 “弱一致性问题”
+     * */
+
     // Positional Access Operations
 
+    // 步骤B：通过下标访问指定位置的元素
     @SuppressWarnings("unchecked")
     private E get(Object[] a, int index) {
         return (E) a[index];
@@ -393,6 +405,7 @@ public class CopyOnWriteArrayList<E>
      *
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
+    // 步骤A：首先获取Array数组
     public E get(int index) {
         return get(getArray(), index);
     }
@@ -403,6 +416,7 @@ public class CopyOnWriteArrayList<E>
      *
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
+    // 修改指定元素
     public E set(int index, E element) {
         final ReentrantLock lock = this.lock;
         lock.lock();
@@ -431,17 +445,31 @@ public class CopyOnWriteArrayList<E>
      * @param e element to be appended to this list
      * @return {@code true} (as specified by {@link Collection#add})
      */
+    // CopyOnWriteArrayList中用来添加元素的函数原理类似，这里以该方法为例讲解
     public boolean add(E e) {
+        // 获取锁并进行加锁
         final ReentrantLock lock = this.lock;
         lock.lock();
         try {
+            // 对数组进行扩容然后赋值给CopyOnWriteArrayList的内置数组
             Object[] elements = getArray();
             int len = elements.length;
+            // 这里要注意，添加元素的操作并不是在原数组上进行的，而是复制一个快照，对快照进行操作
+            // 这种不直接对原数组而是对快照进行操作的策略就叫做 “写时复制”
+
+            /**
+             * “写时复制”有什么好处和坏处呢？
+             *
+             * 优点：当读多写少的时候，读的性能就很高，毕竟读和写是在不同的对象中进行的。相当于”读写分离“。写是copy了一个新数组来写入数据，读的是旧数组。
+             * 缺点：但是也正是因为读写分离，所以数据缺少了实时性。而且由于每次写入需要创建一个快照，在数据量大的情况下，内存压力较大，所以写的性能很差。
+             * */
+
             Object[] newElements = Arrays.copyOf(elements, len + 1);
             newElements[len] = e;
             setArray(newElements);
             return true;
         } finally {
+            // 最后释放锁
             lock.unlock();
         }
     }
@@ -487,6 +515,7 @@ public class CopyOnWriteArrayList<E>
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public E remove(int index) {
+        // 获取独占锁
         final ReentrantLock lock = this.lock;
         lock.lock();
         try {
@@ -494,9 +523,12 @@ public class CopyOnWriteArrayList<E>
             int len = elements.length;
             E oldValue = get(elements, index);
             int numMoved = len - index - 1;
+
+            // 如果删除的是最后一个元素
             if (numMoved == 0)
                 setArray(Arrays.copyOf(elements, len - 1));
             else {
+                // 以index的元素为分界点，分别复制原数组前半部分和后半部分到newElements
                 Object[] newElements = new Object[len - 1];
                 System.arraycopy(elements, 0, newElements, 0, index);
                 System.arraycopy(elements, index + 1, newElements, index,
@@ -1074,6 +1106,8 @@ public class CopyOnWriteArrayList<E>
      *
      * @return an iterator over the elements in this list in proper sequence
      */
+    // 返回COW迭代器
+    // COW迭代器也存在弱一致性问题，在遍历期间，如果有其他线程进行修改数组，那么先前迭代器引用的elements数组就会被新数组替换掉，这就造成了其他线程在此之后操作，使用该迭代器之后都不可见
     public Iterator<E> iterator() {
         return new COWIterator<E>(getArray(), 0);
     }

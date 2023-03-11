@@ -176,8 +176,10 @@ public class CyclicBarrier {
      */
     private void nextGeneration() {
         // signal completion of last generation
+        // 唤醒条件队列中的阻塞线程
         trip.signalAll();
         // set up next generation
+        // 重置CyclicBarrier
         count = parties;
         generation = new Generation();
     }
@@ -198,6 +200,7 @@ public class CyclicBarrier {
     private int dowait(boolean timed, long nanos)
         throws InterruptedException, BrokenBarrierException,
                TimeoutException {
+        // 获得锁并进行加锁
         final ReentrantLock lock = this.lock;
         lock.lock();
         try {
@@ -211,14 +214,17 @@ public class CyclicBarrier {
                 throw new InterruptedException();
             }
 
+            // 如果index=0就说明所有的线程都到达了屏障点，此时开始执行初始化传递的任务barrierAction
             int index = --count;
             if (index == 0) {  // tripped
                 boolean ranAction = false;
                 try {
                     final Runnable command = barrierCommand;
+                    // 执行任务
                     if (command != null)
                         command.run();
                     ranAction = true;
+                    // 激活其他因调用await阻塞的线程，并且重置了CyclicBarrier
                     nextGeneration();
                     return 0;
                 } finally {
@@ -227,11 +233,14 @@ public class CyclicBarrier {
                 }
             }
 
+            // 如果index!=0
             // loop until tripped, broken, interrupted, or timed out
             for (;;) {
                 try {
+                    // 没有设置超时时间的操作
                     if (!timed)
                         trip.await();
+                    // 设置了超时时间的操作
                     else if (nanos > 0L)
                         nanos = trip.awaitNanos(nanos);
                 } catch (InterruptedException ie) {
@@ -258,6 +267,7 @@ public class CyclicBarrier {
                 }
             }
         } finally {
+            // 释放锁
             lock.unlock();
         }
     }

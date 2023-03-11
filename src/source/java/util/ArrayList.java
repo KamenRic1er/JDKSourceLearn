@@ -104,21 +104,28 @@ import sun.misc.SharedSecrets;
  * @since   1.2
  */
 
+// 是一个标志接口，表明实现这个接口的 List 集合是支持快速随机访问的。
+// 在 ArrayList 中，我们即可以通过元素的序号快速获取元素对象，这就是快速随机访问。
 public class ArrayList<E> extends AbstractList<E>
         implements List<E>, RandomAccess, Cloneable, java.io.Serializable
 {
     private static final long serialVersionUID = 8683452581122892189L;
 
+    // 默认初始化大小
     /**
      * Default initial capacity.
      */
     private static final int DEFAULT_CAPACITY = 10;
 
+    // 空数组（用于空实例）
     /**
      * Shared empty array instance used for empty instances.
      */
     private static final Object[] EMPTY_ELEMENTDATA = {};
 
+    // 主要用来标识该ArrayList使用无参构造方法进行了初始化
+    // 用于默认大小空实例的共享空数组实例。
+    // 我们把它从EMPTY_ELEMENTDATA数组中区分出来，以知道在添加第一个元素时容量需要增加多少。
     /**
      * Shared empty array instance used for default sized empty instances. We
      * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when
@@ -126,6 +133,7 @@ public class ArrayList<E> extends AbstractList<E>
      */
     private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
 
+    // 保存ArrayList数据的数组
     /**
      * The array buffer into which the elements of the ArrayList are stored.
      * The capacity of the ArrayList is the length of this array buffer. Any
@@ -134,6 +142,7 @@ public class ArrayList<E> extends AbstractList<E>
      */
     transient Object[] elementData; // non-private to simplify nested class access
 
+    // ArrayList包含的元素
     /**
      * The size of the ArrayList (the number of elements it contains).
      *
@@ -141,6 +150,7 @@ public class ArrayList<E> extends AbstractList<E>
      */
     private int size;
 
+    // 带参构造函数，由用户自己指定容量
     /**
      * Constructs an empty list with the specified initial capacity.
      *
@@ -150,15 +160,20 @@ public class ArrayList<E> extends AbstractList<E>
      */
     public ArrayList(int initialCapacity) {
         if (initialCapacity > 0) {
+            // 初始化值大于0，创建initialCapacity大小的数组
             this.elementData = new Object[initialCapacity];
         } else if (initialCapacity == 0) {
+            // 初始化值等于0，则创建空数组
             this.elementData = EMPTY_ELEMENTDATA;
         } else {
+            // 初始化值小于0，抛出异常
             throw new IllegalArgumentException("Illegal Capacity: "+
                                                initialCapacity);
         }
     }
 
+    // DEFAULTCAPACITY_EMPTY_ELEMENTDATA为0.初始化为10
+    // 意味着ArrayList的初始其实是空数组，当添加第一个元素的时候数组容量才变成10
     /**
      * Constructs an empty list with an initial capacity of ten.
      */
@@ -166,6 +181,7 @@ public class ArrayList<E> extends AbstractList<E>
         this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
     }
 
+    // 构造一个包含指定集合的元素的列表，按照它们由集合的迭代器返回的顺序。
     /**
      * Constructs a list containing the elements of the specified
      * collection, in the order they are returned by the collection's
@@ -177,6 +193,7 @@ public class ArrayList<E> extends AbstractList<E>
     public ArrayList(Collection<? extends E> c) {
         elementData = c.toArray();
         if ((size = elementData.length) != 0) {
+            // 如果elementData不是Object类型数据（c.toArray可能返回的不是Object类型的数组所以加上下面的语句用于判断）
             // c.toArray might (incorrectly) not return Object[] (see 6260652)
             if (elementData.getClass() != Object[].class)
                 elementData = Arrays.copyOf(elementData, size, Object[].class);
@@ -186,6 +203,8 @@ public class ArrayList<E> extends AbstractList<E>
         }
     }
 
+
+    // 修改这个ArrayList实例的容量是列表的当前大小。 应用程序可以使用此操作来最小化ArrayList实例的存储。
     /**
      * Trims the capacity of this <tt>ArrayList</tt> instance to be the
      * list's current size.  An application can use this operation to minimize
@@ -200,6 +219,11 @@ public class ArrayList<E> extends AbstractList<E>
         }
     }
 
+    // 下面是ArrayList的扩容机制
+    // ArrayList的扩容机制提高了性能，如果每次只扩充一个，
+    // 那么频繁的插入会导致频繁的拷贝，降低性能，而ArrayList的扩容机制避免了这种情况。
+
+
     /**
      * Increases the capacity of this <tt>ArrayList</tt> instance, if
      * necessary, to ensure that it can hold at least the number of elements
@@ -208,17 +232,19 @@ public class ArrayList<E> extends AbstractList<E>
      * @param   minCapacity   the desired minimum capacity
      */
     public void ensureCapacity(int minCapacity) {
+        // 如果是true，minExpand的值为0，如果是false,minExpand的值为10
         int minExpand = (elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA)
             // any size if not default element table
             ? 0
             // larger than default for default empty table. It's already
             // supposed to be at default size.
             : DEFAULT_CAPACITY;
-
+        // 如果最小容量大于已有的最大容量
         if (minCapacity > minExpand) {
             ensureExplicitCapacity(minCapacity);
         }
     }
+
 
     private static int calculateCapacity(Object[] elementData, int minCapacity) {
         if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
@@ -227,15 +253,20 @@ public class ArrayList<E> extends AbstractList<E>
         return minCapacity;
     }
 
+
+    // 1.得到最小扩容量
+    // 2.通过最小容量扩容
     private void ensureCapacityInternal(int minCapacity) {
         ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));
     }
 
+    // 判断是否需要扩容
     private void ensureExplicitCapacity(int minCapacity) {
         modCount++;
 
         // overflow-conscious code
         if (minCapacity - elementData.length > 0)
+            // 调用grow开始扩容
             grow(minCapacity);
     }
 
@@ -254,13 +285,24 @@ public class ArrayList<E> extends AbstractList<E>
      * @param minCapacity the desired minimum capacity
      */
     private void grow(int minCapacity) {
+
+        // 先获取旧容量oldCapacity
         // overflow-conscious code
         int oldCapacity = elementData.length;
+
+        // 采用右移计算（效率更高），将新容量newCapacity赋值为旧容量oldCapacity的1.5倍
         int newCapacity = oldCapacity + (oldCapacity >> 1);
+
+        // 检查新容量是否符合最小容量需求，如果新容量小于最小容量需求，就将新容量设计为最小容量需求
         if (newCapacity - minCapacity < 0)
             newCapacity = minCapacity;
+
+        // 再检查新容量newCapacity是否超出了ArrayList类所定义的最大容量
+        // 如果超出了那么就将新容量设置为Integer的最大值，否则设置为Arraylist定义的最大容量
         if (newCapacity - MAX_ARRAY_SIZE > 0)
             newCapacity = hugeCapacity(minCapacity);
+
+        // 最后将elementData按照新容量newCapcity拷贝到一个新数组返回
         // minCapacity is usually close to size, so this is a win:
         elementData = Arrays.copyOf(elementData, newCapacity);
     }
@@ -459,7 +501,9 @@ public class ArrayList<E> extends AbstractList<E>
      * @return <tt>true</tt> (as specified by {@link Collection#add})
      */
     public boolean add(E e) {
+        // 首先是将当前size+1作为参数，然后调用ensureCapacityInternal判断是否需要进行扩容
         ensureCapacityInternal(size + 1);  // Increments modCount!!
+        // 最后将元素放入容量足够未扩容/容量不够扩容过的elementData数组
         elementData[size++] = e;
         return true;
     }

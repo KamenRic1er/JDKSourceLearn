@@ -84,6 +84,7 @@ public class LongAdder extends Striped64 implements Serializable {
     public void add(long x) {
         Cell[] as; long b, v; int m; Cell a;
         if ((as = cells) != null || !casBase(b = base, b + x)) {
+            // 竞争标识，如果是false则代表有竞争。只有cells初始化之后，并且当前线程CAS竞争修改失败，才会是false
             boolean uncontended = true;
             // 连续做四次判断，有一个条件为true则进入striped64类下的longAccumulate方法
             if (as == null || (m = as.length - 1) < 0 ||  // 判断cells数组是否为null、判断cells数组长度是否小于0，小于0意味着需要进行初始化操作

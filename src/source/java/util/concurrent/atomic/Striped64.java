@@ -213,21 +213,30 @@ abstract class Striped64 extends Number {
      * avoids the need for an extra field or function in LongAdder).
      * @param wasUncontended false if CAS failed before call
      */
+    // LongBinaryOperator fn：双目运算接口，默认传递的是null
     final void longAccumulate(long x, LongBinaryOperator fn,
                               boolean wasUncontended) {
-        // 初始化当前线程的变量threadLocalRandomProbe的值，并赋值给变量h
+
+        // 当前线程的threadLocalRandomProbe是否为0，为0就意味着要调用ThreadLocalRandom.current()进行初始化
         int h;
         if ((h = getProbe()) == 0) {
             ThreadLocalRandom.current(); // force initialization
             h = getProbe();
+            // 竞争标识，如果是false则代表有竞争。只有cells初始化之后，并且当前线程CAS竞争修改失败，才会是false
             wasUncontended = true;
         }
+
+        // 表示扩容意向，false 一定不会扩容，true可能会扩容
         boolean collide = false;                // True if last slot nonempty
+
         for (;;) {
             Cell[] as; Cell a; int n; long v;
+
+            /**（1）判断cells是否已经初始化，如果已经初始化则进入该if块 */
             if ((as = cells) != null && (n = as.length) > 0) {
+
                 // 当前线程调用LongAdder.add()方法，根据threadLocalRandomProbe & cells.length-1计算出要访问的cell元素下标
-                // 然后发现该元素为null则新增一个新的cell添加到cells数组
+                // 走到这里意味着该线程应该访问的cell为null，那么就创建一个新的cell，并将x赋给它
                 if ((a = as[(n - 1) & h]) == null) {
                     if (cellsBusy == 0) {       // Try to attach new Cell
                         Cell r = new Cell(x);   // Optimistically create
@@ -245,6 +254,7 @@ abstract class Striped64 extends Number {
                             } finally {
                                 cellsBusy = 0;
                             }
+                            // 新cell插入成功就跳出循环，失败则进入到下一轮循环
                             if (created)
                                 break;
                             continue;           // Slot is now non-empty
@@ -252,13 +262,26 @@ abstract class Striped64 extends Number {
                     }
                     collide = false;
                 }
+
+                // 走到这里意味着该线程应该访问的cell不为null
+                // wasUncontended表示cells初始化后，当前线程竞争修改失败wasUncontended=false，这里只是重新设置了这个值为true，
+                // 紧接着执行advanceProbe(h)重置当前线程的hash，重新循环，换一个Cell访问
                 else if (!wasUncontended)       // CAS already known to fail
                     wasUncontended = true;      // Continue after rehash
+
+                // 进入该if块说明当前线程对应的数组中有了数据，也重置过hash值，这时通过CAS操作尝试对当前数中的value值进行累加x操作，
+                // x默认为1，如果CAS成功则直接跳出循环。
+                // ((fn == null) ? v + x : fn.applyAsLong(v, x))是为了无论如何都是做累加操作
                 else if (a.cas(v = a.value, ((fn == null) ? v + x :
                                              fn.applyAsLong(v, x))))
                     break;
+
+                // 如果cells数组的长度达到了CPU核心数，或者cells扩容了，设置扩容意向collide为false并通过
+                // 下面的h = advanceProbe(h)方法修改线程的probe再重新尝试
                 else if (n >= NCPU || cells != as)
                     collide = false;            // At max size or stale
+
+                // 如果扩容意向collide是false则修改它为true，然后重新计算当前线程的hash值继续循环
                 else if (!collide)
                     collide = true;
 
@@ -280,9 +303,11 @@ abstract class Striped64 extends Number {
                     collide = false;
                     continue;                   // Retry with expanded table
                 }
+                // 修改线程的probe
                 h = advanceProbe(h);
             }
 
+            /**（2）衔接第一级判断我们可知cells还未进行初始化，所以该if块中主要是进行初始化操作 */
             // cells数组初始化
             else if (cellsBusy == 0 && cells == as && casCellsBusy()) {
                 boolean init = false;
@@ -299,6 +324,8 @@ abstract class Striped64 extends Number {
                 if (init)
                     break;
             }
+
+            /**（3）进入到这里说明cells正在或者已经初始化过了。当初始化Cell数组的时候，多个线程尝试CAS修改cellsBusy加锁的时候，失败的线程会走到这个分支，然后直接CAS修改base数据。 */
             else if (casBase(v = base, ((fn == null) ? v + x :
                                         fn.applyAsLong(v, x))))
                 break;                          // Fall back on using base

@@ -120,6 +120,7 @@ import sun.misc.Unsafe;
 public class LockSupport {
     private LockSupport() {} // Cannot be instantiated.
 
+    // 记录t线程是被broker阻塞的
     private static void setBlocker(Thread t, Object arg) {
         // Even though volatile, hotspot doesn't need a write barrier here.
         UNSAFE.putObject(t, parkBlockerOffset, arg);
@@ -170,9 +171,14 @@ public class LockSupport {
      * @since 1.6
      */
     public static void park(Object blocker) {
+        // 获取调用线程
         Thread t = Thread.currentThread();
+        // Thread类中有一个变量parkBlocker，用来存放park方法传递的blocker对象
+        // 设置该线程的blocker变量
         setBlocker(t, blocker);
+        // 挂起线程
         UNSAFE.park(false, 0L);
+        // 线程被激活以后清楚blocker变量
         setBlocker(t, null);
     }
 

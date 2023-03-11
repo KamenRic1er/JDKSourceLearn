@@ -84,6 +84,7 @@ public class ThreadLocal<T> {
      */
     private final int threadLocalHashCode = nextHashCode();
 
+
     /**
      * The next hash code to be given out. Updated atomically. Starts at
      * zero.
@@ -91,6 +92,11 @@ public class ThreadLocal<T> {
     private static AtomicInteger nextHashCode =
         new AtomicInteger();
 
+
+    // HASH_INCREMENT: 表示hash值的增量
+    // 每创建一个ThreadLocal对象，ThreadLocal.nextHashCode的值就会增长HASH_INCREMENT（0x61c88647）。
+    // 这个值很特殊，它是斐波那契数也叫黄金分割数。
+    // hash增量为这个数字，带来的好处就是hash分布非常均匀。
     /**
      * The difference between successively generated hash codes - turns
      * implicit sequential thread-local IDs into near-optimally spread
@@ -98,6 +104,7 @@ public class ThreadLocal<T> {
      */
     private static final int HASH_INCREMENT = 0x61c88647;
 
+    // 创建新的ThreadLocal对象时，使用这个方法，会给当前对象分配一个hash值。
     /**
      * Returns the next hash code.
      */
@@ -157,7 +164,13 @@ public class ThreadLocal<T> {
      * @return the current thread's value of this thread-local
      */
     public T get() {
+        // 获取当前线程
         Thread t = Thread.currentThread();
+        // 得到当前线程的ThreadLocalMap，底层由数组实现，并不是Map集合
+        // 重写Map的目的是为了将Key限定为弱引用类型，Map中的Key是强引用类型
+        // 弱引用的对象，如果外部没有强引用引用他，那么下次当下一次GC时，不管内存是否充足都会对其进行回收
+        // ThreadLocalMap的key设计成弱引用的目的是为了方便区分哪些是过期数据，当GC进行垃圾回收自然将弱引用的key回收从而出现key为null的Entry
+        // key==null也就意味着该Entry是过期数据，从而对过期数据进行处理防止内存泄露
         ThreadLocalMap map = getMap(t);
         if (map != null) {
             ThreadLocalMap.Entry e = map.getEntry(this);
@@ -177,13 +190,20 @@ public class ThreadLocal<T> {
      * @return the initial value
      */
     private T setInitialValue() {
+        // 获取初始值
         T value = initialValue();
+        // 获取当前线程
         Thread t = Thread.currentThread();
+        // 获取当前线程的ThreadLocalMap
         ThreadLocalMap map = getMap(t);
+        // 判断map是否为null，因为可能在此之前有其他线程初始化了map
         if (map != null)
+            // 不为null则执行set方法，将值存入当前线程的map中
             map.set(this, value);
         else
+            // 为null则为当前线程创建threadLocalMap，并将值存进去
             createMap(t, value);
+        // 返回线程与当前threadLocal相关的局部变量
         return value;
     }
 
@@ -318,22 +338,35 @@ public class ThreadLocal<T> {
             }
         }
 
+
+        // 初始化当前map内部散列表数组的初始长度 16
         /**
          * The initial capacity -- MUST be a power of two.
          */
         private static final int INITIAL_CAPACITY = 16;
 
+
+        // threadLocalMap 内部散列表数组的引用，数组的长度必须是2的次方数
         /**
          * The table, resized as necessary.
          * table.length MUST always be a power of two.
          */
         private Entry[] table;
 
+        //当前散列表数组占用情况，存放多少个entry。
         /**
          * The number of entries in the table.
          */
         private int size = 0;
 
+
+        /**
+         * 扩容触发阈值，初始值为： len * 2/3
+         * 触发后调用 rehash() 方法。
+         * rehash() 方法先做一次全量检查全局过期数据，把散列表中所有过期的entry移除。
+         * 如果移除之后,当前散列表中的entry个数仍然达到(threshold - threshold/4)，
+         * 即，当前threshold阈值的3/4就进行扩容。
+         */
         /**
          * The next size value at which to resize.
          */
@@ -461,24 +494,31 @@ public class ThreadLocal<T> {
             // it is to replace existing ones, in which case, a fast
             // path would fail more often than not.
 
+            // 根据key的threadLocalHashCode和length计算对应的Entry下标
             Entry[] tab = table;
             int len = tab.length;
             int i = key.threadLocalHashCode & (len-1);
 
+            // 根据下标判断对应位置的Entry是否为null，为null则直接跳过循环，然后将value和key包装成Entry放入数组tab即可
             for (Entry e = tab[i];
                  e != null;
                  e = tab[i = nextIndex(i, len)]) {
                 ThreadLocal<?> k = e.get();
 
+                // 如果当前桶中 Entry 的 Key 是当前 ThreadLocal 对象，则通过更新操作，将就 Entry 的 Value 值覆盖
                 if (k == key) {
                     e.value = value;
                     return;
                 }
 
+                // 如果如果当前桶中Entry的Key是null，则说明当前Entry已经过期，
+                // 需要执行替换过期数据的逻辑：replaceStaleEntry(key, value, i);。
                 if (k == null) {
                     replaceStaleEntry(key, value, i);
                     return;
                 }
+                // 如果当前桶中Entry的Key既不是当前 ThreadLocal 对象，且不为 null，
+                // 则调用nextIndex(int i, int len)方法线性查找下一个空桶位，并将新数据放入。
             }
 
             tab[i] = new Entry(key, value);

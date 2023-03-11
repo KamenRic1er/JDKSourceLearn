@@ -588,6 +588,7 @@ public abstract class AbstractQueuedSynchronizer
                     tail = head;
             } else {
                 node.prev = t;
+                // 使用CAS算法设置node节点为尾节点，此时t仍然指向上一个节点
                 if (compareAndSetTail(t, node)) {
                     t.next = node;
                     return t;
@@ -859,6 +860,7 @@ public abstract class AbstractQueuedSynchronizer
         try {
             boolean interrupted = false;
             for (;;) {
+                // 获取node的前驱节点
                 final Node p = node.predecessor();
                 if (p == head && tryAcquire(arg)) {
                     setHead(node);
@@ -977,6 +979,7 @@ public abstract class AbstractQueuedSynchronizer
      * Acquires in shared interruptible mode.
      * @param arg the acquire argument
      */
+    // 阻塞当前线程
     private void doAcquireSharedInterruptibly(int arg)
         throws InterruptedException {
         final Node node = addWaiter(Node.SHARED);
@@ -1179,6 +1182,7 @@ public abstract class AbstractQueuedSynchronizer
      * @throws UnsupportedOperationException if conditions are not supported
      */
     protected boolean isHeldExclusively() {
+        // 基于AQS实现的锁还需要重写该方法，用来判断锁是被当前线程共享还是独占
         throw new UnsupportedOperationException();
     }
 
@@ -1195,6 +1199,9 @@ public abstract class AbstractQueuedSynchronizer
      *        can represent anything you like.
      */
     public final void acquire(int arg) {
+        // 首先使用tryAcquire尝试获取资源
+        // 获取成功直接返回，失败则将当前线程封装为EXCLUSIVE的节点插入到AQS阻塞队列尾部并使用LockSupport.park(this)挂起自己
+        // tryAcquire的具体实现要由子类来完成，AQS中并不提供实现
         if (!tryAcquire(arg) &&
             acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
             selfInterrupt();
@@ -1258,6 +1265,8 @@ public abstract class AbstractQueuedSynchronizer
      * @return the value returned from {@link #tryRelease}
      */
     public final boolean release(int arg) {
+        // tryRelease主要内容是设置state的值，然后使用LockSupport.unpark(thread)激活AQS中被阻塞的一个线程
+        // 被激活的线程继续尝试tryAcquire
         if (tryRelease(arg)) {
             Node h = head;
             if (h != null && h.waitStatus != 0)
