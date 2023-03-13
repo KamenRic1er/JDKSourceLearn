@@ -684,6 +684,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
     // 图片解析：https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/put%E6%96%B9%E6%B3%95.png
     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                    boolean evict) {
+
         // 指向table的索引副本
         Node<K,V>[] tab;
         // 指向当前节点
@@ -691,12 +692,17 @@ public class HashMap<K,V> extends AbstractMap<K,V>
         // n表示table.length - 1，i表示路由寻址结果，即当前节点需要插入位置的索引
         int n, i;
 
-        // 1.table未初始化或者长度为0，进行扩容
+        /**
+         * 1.table未初始化或者长度为0，进行扩容
+         * */
+
         if ((tab = table) == null || (n = tab.length) == 0)
             // 这是一种延迟加载策略
             n = (tab = resize()).length;
 
-        // 2.接下来将进行节点（链表节点/树节点）的插入
+        /**
+         * 2.接下来将进行节点（链表节点/树节点）的插入
+         * */
 
         // (n - 1) & hash 确定元素存放在哪个桶中，桶为空，新生成结点放入桶中(此时，这个结点是放在数组中)
         if ((p = tab[i = (n - 1) & hash]) == null)
@@ -707,6 +713,9 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             // 节点e用于指向key相同的节点，也就是我们要找的节点，后面会根据onlyIfAbsent判断是否将旧值覆盖
             Node<K,V> e;
             K k;
+
+            // （1）在HashMap中查找我们需要找到的节点，存在则将e指向该节点，不存在则插入新节点
+
             // 判断table[i]中的第一个元素（链表的头节点/红黑树的根）的key是否与要插入的节点的key一样，如果相同就将e指向p
             if (p.hash == hash &&
                 ((k = p.key) == key || (key != null && key.equals(k))))
@@ -747,6 +756,8 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                 }
             }
 
+            //（2）找到了我们需要找的元素，根据onlyIfAbsent判断是否进行值覆盖
+
             // 表示在桶中找到key值、hash值与插入元素相等的结点，然后根据onlyIfAbsent判断对其进行覆盖操作
             if (e != null) { // existing mapping for key
                 // 记录e的value
@@ -762,6 +773,10 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             }
         }
 
+
+        /**
+         * 3.最终处理
+         * */
         // 表示散列表结构被修改的次数，替换Node的val不算
         ++modCount;
 
@@ -785,6 +800,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      */
     // resize方法用于扩容，扩容的目的是为了解决哈希冲突导致的链化影响查询效率的问题，扩容可以缓解该问题
     final Node<K,V>[] resize() {
+
         // 引用扩容前的哈希表
         Node<K,V>[] oldTab = table;
         // 表示扩容前的table数组长度
@@ -812,6 +828,9 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                      oldCap >= DEFAULT_INITIAL_CAPACITY)
                 newThr = oldThr << 1; // double threshold
         }
+
+        // 从下面的代码我们也可以了解到为什么new HashMap(initCap, loadFactor)中将initCap赋值给了threshold
+
         // oldCap == 0
         // 走到这里意味着oldCap不大于0，也就是说oldCap等于0，table还未进行初始化（table == null）
         // 什么时候table=null，而oldThr又大于0呢
@@ -822,6 +841,8 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             newCap = oldThr;
 
         // oldCap == 0, oldThr == 0
+        // 走到这里意味着该HashMap调用了默认构造函数进行了初始化
+        // new HashMap()
         else {               // zero initial threshold signifies using defaults
             // 初始化cap
             newCap = DEFAULT_INITIAL_CAPACITY;
@@ -829,7 +850,8 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
         }
 
-        // newThr为0时，通过newCap * loadFactor计算出newThr
+
+        // 如果new Thr仍然为0，意味着前面的代码还没有对其进行初始化，在这里我们将对其进行初始化
         if (newThr == 0) {
             float ft = (float)newCap * loadFactor;
             newThr = (newCap < MAXIMUM_CAPACITY && ft < (float)MAXIMUM_CAPACITY ?
@@ -843,11 +865,12 @@ public class HashMap<K,V> extends AbstractMap<K,V>
         Node<K,V>[] newTab = (Node<K,V>[])new Node[newCap];
         table = newTab;
 
-        // 扩容之前有数据
+        // oldTab == null说明这是初始化操作，不等于null则意味着是正常扩容过程
         if (oldTab != null) {
             for (int j = 0; j < oldCap; ++j) {
                 // 用于指向当前节点
                 Node<K,V> e;
+
                 // 将e指向当前节点，当前节点是单个节点还是链表头节点还是红黑树根节点，我们都还未知，接下来进行详细处理。
                 if ((e = oldTab[j]) != null) {
                     // 此时e已经指向该节点了，将该节点置为null方便jvm进行垃圾回收
@@ -857,7 +880,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                     if (e.next == null)
                         newTab[e.hash & (newCap - 1)] = e;
 
-                    // 第二种情况，当前节点已经树化
+                    // 第二种情况，该桶位的节点已经树化
                     else if (e instanceof TreeNode)
                         ((TreeNode<K,V>)e).split(this, newTab, j, oldCap);
 
