@@ -392,24 +392,30 @@ public abstract class ClassLoader {
      *
      * @param  resolve
      *         If <tt>true</tt> then resolve the class
+     *         如果为True，则解析该类
      *
      * @return  The resulting <tt>Class</tt> object
      *
      * @throws  ClassNotFoundException
      *          If the class could not be found
      */
+    // 在我们需要自定义类加载器的情况下，如果想要打破双亲委派机制就重写loadClass()方法，这样不会走双亲委派机制，如果不想打破双亲委派机制，那么久重写findClass()方法
     protected Class<?> loadClass(String name, boolean resolve)
         throws ClassNotFoundException
     {
         synchronized (getClassLoadingLock(name)) {
             // First, check if the class has already been loaded
+            // 首先检查该类是否已经加载过了
             Class<?> c = findLoadedClass(name);
+            // 如果 c 为 null，则说明该类没有被加载过
             if (c == null) {
                 long t0 = System.nanoTime();
                 try {
                     if (parent != null) {
+                        // 当父类的加载器不为空，则通过父类的loadClass来加载该类
                         c = parent.loadClass(name, false);
                     } else {
+                        // 当父类的加载器为空，则调用启动类加载器来加载该类
                         c = findBootstrapClassOrNull(name);
                     }
                 } catch (ClassNotFoundException e) {
@@ -420,16 +426,20 @@ public abstract class ClassLoader {
                 if (c == null) {
                     // If still not found, then invoke findClass in order
                     // to find the class.
+                    // 当父类加载器无法加载时，则调用findClass方法来加载该类
+                    // 用户可通过覆写该方法，来自定义类加载器
                     long t1 = System.nanoTime();
                     c = findClass(name);
 
                     // this is the defining class loader; record the stats
+                    // 用于统计类加载器相关的信息
                     sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);
                     sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);
                     sun.misc.PerfCounter.getFindClasses().increment();
                 }
             }
             if (resolve) {
+                // 对类进行link操作
                 resolveClass(c);
             }
             return c;
