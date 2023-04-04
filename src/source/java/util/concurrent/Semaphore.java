@@ -156,6 +156,7 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 public class Semaphore implements java.io.Serializable {
     private static final long serialVersionUID = -3222578661600680210L;
     /** All mechanics via AbstractQueuedSynchronizer subclass */
+    // 内部实现类，同样的继承自AQS
     private final Sync sync;
 
     /**
@@ -262,6 +263,7 @@ public class Semaphore implements java.io.Serializable {
      *        must occur before any acquires will be granted.
      */
     public Semaphore(int permits) {
+
         sync = new NonfairSync(permits);
     }
 

@@ -175,9 +175,11 @@ public class CyclicBarrier {
      * Called only while holding lock.
      */
     private void nextGeneration() {
+
         // signal completion of last generation
         // 唤醒条件队列中的阻塞线程
         trip.signalAll();
+
         // set up next generation
         // 重置CyclicBarrier
         count = parties;
@@ -189,8 +191,11 @@ public class CyclicBarrier {
      * Called only while holding lock.
      */
     private void breakBarrier() {
+        // 标记屏障已经被打破
         generation.broken = true;
+        // 将count重新设置为parties
         count = parties;
+        // 唤醒条件队列中的阻塞线程
         trip.signalAll();
     }
 
@@ -229,6 +234,7 @@ public class CyclicBarrier {
                     return 0;
                 } finally {
                     if (!ranAction)
+                        // 将当前屏障生成设置为已破坏并唤醒所有人。
                         breakBarrier();
                 }
             }
@@ -472,11 +478,14 @@ public class CyclicBarrier {
      * and choose one to perform the reset.  It may be preferable to
      * instead create a new barrier for subsequent use.
      */
+    // 我的理解是将CyclicBarrier重置
     public void reset() {
         final ReentrantLock lock = this.lock;
         lock.lock();
         try {
+            // 打破当前屏障
             breakBarrier();   // break the current generation
+            // 重新设置屏障
             nextGeneration(); // start a new generation
         } finally {
             lock.unlock();

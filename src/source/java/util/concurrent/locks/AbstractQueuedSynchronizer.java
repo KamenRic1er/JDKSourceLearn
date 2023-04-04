@@ -979,10 +979,13 @@ public abstract class AbstractQueuedSynchronizer
      * Acquires in shared interruptible mode.
      * @param arg the acquire argument
      */
-    // 阻塞当前线程
+    // 调用该方法意味着将阻塞当前线程，也就是将当前线程封装为Node放入AQS阻塞队列
     private void doAcquireSharedInterruptibly(int arg)
         throws InterruptedException {
+
+        // 为当前线程和给定模式创建节点并将其排队，并且标识该节点是获取共享资源所导致的阻塞
         final Node node = addWaiter(Node.SHARED);
+
         boolean failed = true;
         try {
             for (;;) {
@@ -1307,8 +1310,10 @@ public abstract class AbstractQueuedSynchronizer
      */
     public final void acquireSharedInterruptibly(int arg)
             throws InterruptedException {
+        // 如果当前线程已经被标记为中断，那么就会抛出异常终止执行
         if (Thread.interrupted())
             throw new InterruptedException();
+
         if (tryAcquireShared(arg) < 0)
             doAcquireSharedInterruptibly(arg);
     }
