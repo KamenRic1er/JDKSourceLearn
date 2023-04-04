@@ -84,13 +84,20 @@ public class LongAdder extends Striped64 implements Serializable {
     public void add(long x) {
         Cell[] as; long b, v; int m; Cell a;
         if ((as = cells) != null || !casBase(b = base, b + x)) {
+
             // 竞争标识，如果是false则代表有竞争。只有cells初始化之后，并且当前线程CAS竞争修改失败，才会是false
             boolean uncontended = true;
+
             // 连续做四次判断，有一个条件为true则进入striped64类下的longAccumulate方法
-            if (as == null || (m = as.length - 1) < 0 ||  // 判断cells数组是否为null、判断cells数组长度是否小于0，小于0意味着需要进行初始化操作
-                (a = as[getProbe() & m]) == null ||  // 根据当前线程的threadLocalRandomProbe和cells.length-1
-                    // 进行与运算得到本线程需要访问的cell元素的下标
-                !(uncontended = a.cas(v = a.value, v + x)))  // 使用cas将cell的值加x，成功就返回true失败则返回false
+
+            // （1）此条件成立说明cells数组未初始化。如果不成立则说明cells数组已经完成初始化，对应的线程需要找到Cell数组中的元素去写值。
+            if (as == null || (m = as.length - 1) < 0 ||
+
+            // （2）当条件成立时说明当前线程通过hash计算出来数组位置处的cell为空，进一步去执行longAccumulate()方法。如果不成立则说明对应的cell不为空，下一步将要将x值通过CAS操作添加到cell中。
+                (a = as[getProbe() & m]) == null ||
+
+            // （3）当此条件成立的时候，意味着当前线程应该访问的Cell元素不为null，那么紧接着就使用CAS对该Cell元素进行增操作，如果失败则返回false，也就意味着将进入到longAccumulate中
+                !(uncontended = a.cas(v = a.value, v + x)))
 
                 longAccumulate(x, null, uncontended);
         }
@@ -120,8 +127,11 @@ public class LongAdder extends Striped64 implements Serializable {
      * @return the sum
      */
     public long sum() {
+        // as作为cells数组的引用副本，a指向当前正在处理的Cell对象
         Cell[] as = cells; Cell a;
         long sum = base;
+
+        // 判断cells数组是否为空，为空则直接返回基值base，不为空则对cells数组中的每个Cell进行累加返回
         if (as != null) {
             for (int i = 0; i < as.length; ++i) {
                 if ((a = as[i]) != null)
