@@ -378,20 +378,34 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      * that workerCount is 0 (which sometimes entails a recheck -- see
      * below).
      */
+    // 线程池用高3位表示线程池状态，低29位表示线程个数
+    // 这里的ctl变量就是保存线程池状态+线程池中线程个数的变量
     private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
+    // 线程个数掩码位数，值为Integer的位数（32）-3
     private static final int COUNT_BITS = Integer.SIZE - 3;
+    // 线程池最大线程数：00011111 11111111 11111111 11111111
     private static final int CAPACITY   = (1 << COUNT_BITS) - 1;
 
+    // 线程池状态常量，用于判断线程池的状态
     // runState is stored in the high-order bits
+    // （高三位）11100000 00000000 00000000 00000000
+    // 计算机内部是使用补码存放值的，-1的补码为11111111 11111111 11111111 11111111，左移29位自然就是上面的值了
     private static final int RUNNING    = -1 << COUNT_BITS;
+    // （高三位）00000000 00000000 00000000 00000000
     private static final int SHUTDOWN   =  0 << COUNT_BITS;
+    // （高三位）00100000 00000000 00000000 00000000
     private static final int STOP       =  1 << COUNT_BITS;
+    // （高三位）01000000 00000000 00000000 00000000
     private static final int TIDYING    =  2 << COUNT_BITS;
+    // （高三位）01100000 00000000 00000000 00000000
     private static final int TERMINATED =  3 << COUNT_BITS;
 
     // Packing and unpacking ctl
+    // 用于获取ctl变量中的运行状态：***00000 00000000 00000000 00000000
     private static int runStateOf(int c)     { return c & ~CAPACITY; }
+    // 用于获取ctl变量中的线程个数：000***** ******** ******** ********
     private static int workerCountOf(int c)  { return c & CAPACITY; }
+    // 计算ctl变量的新值
     private static int ctlOf(int rs, int wc) { return rs | wc; }
 
     /*
@@ -434,6 +448,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
         do {} while (! compareAndDecrementWorkerCount(ctl.get()));
     }
 
+    // 工作线程的阻塞队列，用于存放等待执行的任务。
     /**
      * The queue used for holding tasks and handing off to worker
      * threads.  We do not require that workQueue.poll() returning
@@ -462,6 +477,8 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      */
     private final ReentrantLock mainLock = new ReentrantLock();
 
+    // 存储了线程池中所有的工作线程，用于快速查询线程池中是否存在某个线程。
+    // 当一个线程加入到线程池中时，会被 workers 集合持有。当线程被移除时，会从集合中删除。
     /**
      * Set containing all worker threads in pool. Accessed only when
      * holding mainLock.
@@ -614,8 +631,10 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
          * @param firstTask the first task (null if none)
          */
         Worker(Runnable firstTask) {
+            // 在调用runWorker方法前禁止中断
             setState(-1); // inhibit interrupts until runWorker
             this.firstTask = firstTask;
+            // 创建一个线程
             this.thread = getThreadFactory().newThread(this);
         }
 
@@ -708,6 +727,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
             final ReentrantLock mainLock = this.mainLock;
             mainLock.lock();
             try {
+                // 设置当前线程池状态为TIDYING
                 if (ctl.compareAndSet(c, ctlOf(TIDYING, 0))) {
                     try {
                         terminated();
@@ -786,11 +806,16 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      * waiting for a straggler task to finish.
      */
     private void interruptIdleWorkers(boolean onlyOne) {
+
         final ReentrantLock mainLock = this.mainLock;
         mainLock.lock();
         try {
+
+            // 遍历workers中的所有worker
             for (Worker w : workers) {
                 Thread t = w.thread;
+                // 如果当前worker的线程没有被设置为中断，并且没有正在运行则将其设置为中断。
+                // 简单来说就是将所有空闲线程的中断标志设置为true
                 if (!t.isInterrupted() && w.tryLock()) {
                     try {
                         t.interrupt();
@@ -802,6 +827,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
                 if (onlyOne)
                     break;
             }
+
         } finally {
             mainLock.unlock();
         }
@@ -899,11 +925,18 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      * @return true if successful
      */
     private boolean addWorker(Runnable firstTask, boolean core) {
+
+        // 外层循环
         retry:
         for (;;) {
+
+            // 获取ctl变量的值
             int c = ctl.get();
+            // 获得线程池状态
             int rs = runStateOf(c);
 
+            // （1）
+            // 检查队列是否只在必要时为空
             // Check if queue empty only if necessary.
             if (rs >= SHUTDOWN &&
                 ! (rs == SHUTDOWN &&
@@ -911,13 +944,26 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
                    ! workQueue.isEmpty()))
                 return false;
 
+
+            // 内层循环
+            // 循环CAS增加线程个数
             for (;;) {
+
+                // 获取当前线程池中的线程数目
                 int wc = workerCountOf(c);
+                // 如果线程数目超限则直接返回false意味着添加工作线程失败
                 if (wc >= CAPACITY ||
                     wc >= (core ? corePoolSize : maximumPoolSize))
                     return false;
+
+                // （2）
+                // 这里使用CAS增加线程个数，只有一个线程可以CAS成功
                 if (compareAndIncrementWorkerCount(c))
+                    // CAS操作成功则跳出外循环，继续向下执行
                     break retry;
+
+                // CAS操作失败以后，判断线程池状态是否发生改变
+                // 如果变化则重新获取线程池状态值，进行下一轮的外层循环，如果未发生变化，那么就直接进行下一轮的内层循环（继续CAS增加线程数目）
                 c = ctl.get();  // Re-read ctl
                 if (runStateOf(c) != rs)
                     continue retry;
@@ -925,16 +971,26 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
             }
         }
 
+/**-----------------------------------------------------------------------------------------------------------------**/
+
+        // 标识新增线程是否启动成功
         boolean workerStarted = false;
+        // 标识新增线程是否添加成功
         boolean workerAdded = false;
+
         Worker w = null;
         try {
+            // 创建worker
             w = new Worker(firstTask);
             final Thread t = w.thread;
             if (t != null) {
+
+                // 加独占锁，为了实现workers同步，因为可能多个线程调用了execute方法
                 final ReentrantLock mainLock = this.mainLock;
                 mainLock.lock();
                 try {
+
+                    // 重新检查线程池状态，以免在获取锁前调用了shutdown接口
                     // Recheck while holding lock.
                     // Back out on ThreadFactory failure or if
                     // shut down before lock acquired.
@@ -942,26 +998,33 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 
                     if (rs < SHUTDOWN ||
                         (rs == SHUTDOWN && firstTask == null)) {
+                        // 判断线程是否可以启动
                         if (t.isAlive()) // precheck that t is startable
                             throw new IllegalThreadStateException();
+
+                        // 添加任务
                         workers.add(w);
                         int s = workers.size();
                         if (s > largestPoolSize)
                             largestPoolSize = s;
+                        // 将添加任务标识修改为成功
                         workerAdded = true;
                     }
                 } finally {
                     mainLock.unlock();
                 }
+                // 添加任务成功以后则启动任务，同时将启动任务标识修改为true
                 if (workerAdded) {
                     t.start();
                     workerStarted = true;
                 }
             }
         } finally {
+            // 如果线程启动失败，则调用addWorkerFailed方法将worker回滚到创建时的创建状态
             if (! workerStarted)
                 addWorkerFailed(w);
         }
+        // 最后将worker启动标识返回
         return workerStarted;
     }
 
@@ -999,21 +1062,30 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      * @param completedAbruptly if the worker died due to user exception
      */
     private void processWorkerExit(Worker w, boolean completedAbruptly) {
+
+        // 如果是被突然中断了，则不调整线程池中线程数目
         if (completedAbruptly) // If abrupt, then workerCount wasn't adjusted
             decrementWorkerCount();
 
+        // 统计整个线程池完成的任务个数，并从工作集中删除当前Worker
         final ReentrantLock mainLock = this.mainLock;
         mainLock.lock();
         try {
             completedTaskCount += w.completedTasks;
+            // 工作线程执行完任务后，及时将线程从线程池中移除，释放资源，避免浪费系统资源。
             workers.remove(w);
         } finally {
             mainLock.unlock();
         }
 
+
+        // 如果当前是SHUTDOWN状态并且工作队列为空，或者当前是STOP状态，当前线程池中没有活动线程。那么尝试设置线程池状态为TERMINATED
         tryTerminate();
 
+
+        // 如果当前线程个数小于核心线程个数，则增加线程
         int c = ctl.get();
+        // c < STOP : RUNNING
         if (runStateLessThan(c, STOP)) {
             if (!completedAbruptly) {
                 int min = allowCoreThreadTimeOut ? 0 : corePoolSize;
@@ -1125,14 +1197,26 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      * @param w the worker
      */
     final void runWorker(Worker w) {
+
+        // 获得当前工作线程
         Thread wt = Thread.currentThread();
+        // 获得Worker中的任务
         Runnable task = w.firstTask;
+        // 将Worker中的firstTask置为null
         w.firstTask = null;
+
+        // 构造方法中将state置为了-1，禁止被中断，这里将state置为0，意味着允许被中断
         w.unlock(); // allow interrupts
+
+        // 标识线程是否是突然退出，如果在任务执行完毕以前（completedAbruptly为true），当前线程被中断，就会为true标识突然中断
         boolean completedAbruptly = true;
         try {
+
+            // 如果task不为null或者从任务队列获取的任务不为null，则进入循环
             while (task != null || (task = getTask()) != null) {
                 w.lock();
+
+                // 如果池停止，请确保线程中断；如果没有，请确保线程未中断。
                 // If pool is stopping, ensure thread is interrupted;
                 // if not, ensure thread is not interrupted.  This
                 // requires a recheck in second case to deal with
@@ -1142,10 +1226,16 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
                       runStateAtLeast(ctl.get(), STOP))) &&
                     !wt.isInterrupted())
                     wt.interrupt();
+
                 try {
+
+                    // 执行任务前干一些事情（未定义）
                     beforeExecute(wt, task);
+
                     Throwable thrown = null;
                     try {
+
+                        // 正式执行任务
                         task.run();
                     } catch (RuntimeException x) {
                         thrown = x; throw x;
@@ -1154,16 +1244,26 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
                     } catch (Throwable x) {
                         thrown = x; throw new Error(x);
                     } finally {
+
+                        // 执行任务后做一些事情（未定义）
                         afterExecute(task, thrown);
                     }
                 } finally {
+                    // 任务完成后手动释放内存
                     task = null;
+                    // 将Work的完成任务计数器+1
                     w.completedTasks++;
+                    // 释放锁
                     w.unlock();
                 }
             }
+
+            // 标识线程是否是突然退出
             completedAbruptly = false;
         } finally {
+
+            // 执行清理工作
+            // 第一个参数是工作线程对象，第二参数标识线程是否是被突然中断
             processWorkerExit(w, completedAbruptly);
         }
     }
@@ -1340,6 +1440,8 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      * @throws NullPointerException if {@code command} is null
      */
     public void execute(Runnable command) {
+
+        // 判断任务是否为null，是则抛出空指针异常
         if (command == null)
             throw new NullPointerException();
         /*
@@ -1362,20 +1464,39 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
          * thread.  If it fails, we know we are shut down or saturated
          * and so reject the task.
          */
+
+
+        // 判断当前线程池中的线程数目是否超过核心线程数目
+        // 获取当前ctl的值
         int c = ctl.get();
         if (workerCountOf(c) < corePoolSize) {
-            if (addWorker(command, true))
+            // 如果没有超过核心线程数目，那么就调用addWorker方法增加线程池中的线程，然后就此返回
+            if (addWorker(command, true)) // 这里第二个参数用于标识添加的线程是否是核心线程
                 return;
+            // 重新获取ctl的值，因为执行addWorker方法时，线程池的状态可能已经发生了变化
             c = ctl.get();
         }
+        // 上面的代码执行完，如果继续向下走，只有两种情况：
+        // （1）workerCountOf(c) = corePoolSize：这种情况会把任务放入阻塞队列
+        // （2）workerCountOf(c) > corePoolSize：这种情况会创建新线程
+
+
+        // 如果线程池处于运行状态，那么就添加任务到阻塞队列中
         if (isRunning(c) && workQueue.offer(command)) {
+
+            // 二次检查，重新获取ctl的值，原因同上
             int recheck = ctl.get();
+            // 如果线程池已经不处于recheck状态，那么就尝试将刚刚添加的任务移除，同时执行拒绝策略
             if (! isRunning(recheck) && remove(command))
                 reject(command);
+
+            // 当前线程为空则添加一个新的线程
             else if (workerCountOf(recheck) == 0)
                 addWorker(null, false);
         }
+        // 添加任务到阻塞队列失败，换句话说就是阻塞队列已满
         else if (!addWorker(command, false))
+            // 执行拒绝策略
             reject(command);
     }
 
@@ -1394,13 +1515,20 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
         final ReentrantLock mainLock = this.mainLock;
         mainLock.lock();
         try {
+            // 权限检查
             checkShutdownAccess();
+
+            // 设置当前线程池状态为SHUTDOWN，如果已经是SHUTDOWN则直接返回
             advanceRunState(SHUTDOWN);
+
+            // 设置中断标志
             interruptIdleWorkers();
             onShutdown(); // hook for ScheduledThreadPoolExecutor
+
         } finally {
             mainLock.unlock();
         }
+        // 尝试将线程池状态修改为TERMINATED
         tryTerminate();
     }
 
