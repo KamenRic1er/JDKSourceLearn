@@ -1,6 +1,6 @@
 @echo off
 
-rem 修改CURRENT_DIR和SOURCE_DIR即可使用本脚本
+rem 使用须知：修改CURRENT_DIR和SOURCE_DIR即可使用本脚本！！！！！！
 
 rem 记录当前位置
 set "CURRENT_DIR=%cd%"
