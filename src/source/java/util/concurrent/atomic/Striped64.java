@@ -215,17 +215,15 @@ abstract class Striped64 extends Number {
      * avoids the need for an extra field or function in LongAdder).
      * @param wasUncontended false if CAS failed before call
      */
-    // LongBinaryOperator fn：双目运算接口，默认传递的是null
+    // 流程图：https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/5/14/1721308e871bc27b~tplv-t2oaga2asx-zoom-in-crop-mark:1512:0:0:0.awebp
     final void longAccumulate(long x, LongBinaryOperator fn,
                               boolean wasUncontended) {
 
         // h用于记录当前线程的Probe值，这个值将用来寻找Cell数组中当前线程应该访问的Cell元素的下标
         int h;
 
-        // 当前线程的threadLocalRandomProbe是否为0
+        // 当前线程的threadLocalRandomProbe是否为0，为0调用ThreadLocalRandom.current()进行初始化
         if ((h = getProbe()) == 0) {
-
-            // 为0就意味着要调用ThreadLocalRandom.current()进行初始化
             ThreadLocalRandom.current(); // force initialization
             h = getProbe();
 
@@ -239,10 +237,10 @@ abstract class Striped64 extends Number {
         for (;;) {
             Cell[] as; Cell a; int n; long v;
 
-            /**（1）判断cells是否已经初始化，如果已经初始化则进入该if块 */
+            /**（1）Cells数组已经初始化 */
             if ((as = cells) != null && (n = as.length) > 0) {
 
-                // 根据threadLocalRandomProbe & cells.length-1计算出要访问的cell元素下标
+                // 1.1 当前Cell为null
                 if ((a = as[(n - 1) & h]) == null) {
 
                     // 判断是否可以对cells数组进行操作
@@ -266,7 +264,6 @@ abstract class Striped64 extends Number {
                             // 新cell插入成功就跳出循环，失败则进入到下一轮循环
                             if (created)
                                 break;
-
                             // 如果插入失败则进行下一轮循环
                             continue;           // Slot is now non-empty
                         }
@@ -274,29 +271,24 @@ abstract class Striped64 extends Number {
                     collide = false;
                 }
 
-                // 走到这里意味着该线程应该访问的cell不为null
-                // wasUncontended表示cells初始化后，当前线程竞争修改失败wasUncontended=false，这里只是重新设置了这个值为true，
-                // 紧接着执行advanceProbe(h)重置当前线程的hash，重新循环，就是换一个Cell访问，这样避免了大量线程对一个Cell进行CAS重试
+                // 1.2 竞争修改value失败
                 else if (!wasUncontended)       // CAS already known to fail
                     wasUncontended = true;      // Continue after rehash
 
-                // 进入该if块说明当前线程对应的数组中有了数据，也重置过hash值，这时通过CAS操作尝试对当前数中的value值进行累加x操作，
-                // x默认为1，如果CAS成功则直接跳出循环。
-                // ((fn == null) ? v + x : fn.applyAsLong(v, x))是为了无论如何都是做累加操作
+                // 1.3 尝试修改数组cell值
                 else if (a.cas(v = a.value, ((fn == null) ? v + x :
                                              fn.applyAsLong(v, x))))
                     break;
 
-                // 如果cells数组的长度达到了CPU核心数，或者cells扩容了，设置扩容意向collide为false并通过
-                // 下面的h = advanceProbe(h)方法修改线程的probe再重新尝试
+                // 1.4 当Cells数组长度大于NCPU或者Cells数组被扩容
                 else if (n >= NCPU || cells != as)
                     collide = false;            // At max size or stale
 
-                // 如果扩容意向collide是false则修改它为true，然后重新计算当前线程的hash值继续循环
+                // 1.5 当前线程下数组长度小于CPU核数且数组未扩容
                 else if (!collide)
                     collide = true;
 
-                // 扩容操作，这里判断cellsBusy为0意味着cells数组没有被扩容或者初始化，进入if块的同时使用cas将cellsBusy修改为1
+                // 1.6 尝试占线，开始扩容
                 else if (cellsBusy == 0 && casCellsBusy()) {
                     try {
                         if (cells == as) {      // Expand table unless stale
@@ -321,36 +313,27 @@ abstract class Striped64 extends Number {
                 h = advanceProbe(h);
             }
 
-            /**（2）衔接第一级判断我们可知cells还未进行初始化，所以该if块中主要是进行初始化操作 */
-
+            /**（2）Cells数组还未进行初始化 */
             // cellsBusy=0意味着cells数组无锁，可以进行操作。然后使用casCellsBusy方法将该值修改为1（意味着有锁状态）
             else if (cellsBusy == 0 && cells == as && casCellsBusy()) {
                 boolean init = false;
                 try {                           // Initialize table
                     if (cells == as) {
-                        // 初始化Cell数组，默认长度为2
                         Cell[] rs = new Cell[2];
-
-                        // 根据当前线程的Probe值计算出数组下标，并初始化一个Cell，其value为本方法传进来的x
                         rs[h & 1] = new Cell(x);
-
-                        // 将rs赋值给cells数组
                         cells = rs;
                         init = true;
                     }
                 } finally {
-                    // 表示cells数组当前无锁，可以操作
+                    // 初始化完释放锁
                     cellsBusy = 0;
                 }
 
-                // 至此longAccumulate执行结束，也就是说我们调用LongAdder中的add()方法已经增加成功了，所以跳出循环
                 if (init)
                     break;
             }
 
-            /**（3）进入到这里说明cells正在或者已经初始化过了。当初始化Cell数组的时候，多个线程尝试CAS修改cellsBusy加锁的时候，失败的线程会走到这个分支，然后直接CAS修改base数据。 */
-
-            // 这里的base就是前面提到的基值，这个base并不是存在于LongAdder中，而是LongAdder继承自Striped64类
+            /**（3）Cells数组正在初始化，直接CAS尝试修改base数据。 */
             else if (casBase(v = base, ((fn == null) ? v + x :
                                         fn.applyAsLong(v, x))))
                 break;                          // Fall back on using base

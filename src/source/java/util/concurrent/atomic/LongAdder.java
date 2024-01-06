@@ -83,20 +83,19 @@ public class LongAdder extends Striped64 implements Serializable {
      */
     public void add(long x) {
         Cell[] as; long b, v; int m; Cell a;
+        // 第一次调用add方法时，cells数组为空，然后尝试对base进行CAS修改，失败则进入下面的判断逻辑，成功则直接返回
         if ((as = cells) != null || !casBase(b = base, b + x)) {
 
-            // 竞争标识，如果是false则代表有竞争。只有cells初始化之后，并且当前线程CAS竞争修改失败，才会是false
+            // 竞争标识
             boolean uncontended = true;
 
-            // 连续做四次判断，有一个条件为true则进入striped64类下的longAccumulate方法
-
-            // （1）此条件成立说明cells数组未初始化。如果不成立则说明cells数组已经完成初始化，对应的线程需要找到Cell数组中的元素去写值。
+            // （1）Cells数组未初始化
             if (as == null || (m = as.length - 1) < 0 ||
 
-            // （2）当条件成立时说明当前线程通过hash计算出来数组位置处的cell为空，进一步去执行longAccumulate()方法。如果不成立则说明对应的cell不为空，下一步将要将x值通过CAS操作添加到cell中。
+            // （2）Cells数组已经初始化，但是当前线程对应的Cell数据为空
                 (a = as[getProbe() & m]) == null ||
 
-            // （3）当此条件成立的时候，意味着当前线程应该访问的Cell元素不为null，那么紧接着就使用CAS对该Cell元素进行增操作，如果失败则返回false，也就意味着将进入到longAccumulate中
+            // （3）Cells数组已经初始化，当前线程对应的Cell数据不为空，且CAS操作+1失败
                 !(uncontended = a.cas(v = a.value, v + x)))
 
                 longAccumulate(x, null, uncontended);
