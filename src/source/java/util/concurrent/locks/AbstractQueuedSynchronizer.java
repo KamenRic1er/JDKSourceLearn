@@ -581,14 +581,17 @@ public abstract class AbstractQueuedSynchronizer
      * @return node's predecessor
      */
     private Node enq(final Node node) {
+        // 第一次执行，也就是head和tail两个指针都为null，会初始化两个Node
         for (;;) {
             Node t = tail;
+            // 初始化队列，设置一个空Node，并将head与tail两个指针同时指向该节点
             if (t == null) { // Must initialize
                 if (compareAndSetHead(new Node()))
                     tail = head;
+            // 队列已经初始化完成，则将该节点插入队列尾部
             } else {
                 node.prev = t;
-                // 使用CAS算法设置node节点为尾节点，此时t仍然指向上一个节点
+                // 注意，此时t仍然指向，为尾节点的上一个节点
                 if (compareAndSetTail(t, node)) {
                     t.next = node;
                     return t;
@@ -607,6 +610,7 @@ public abstract class AbstractQueuedSynchronizer
         Node node = new Node(Thread.currentThread(), mode);
         // Try the fast path of enq; backup to full enq on failure
         Node pred = tail;
+        // 获取锁失败，再次判断队列是否初始化
         if (pred != null) {
             node.prev = pred;
             if (compareAndSetTail(pred, node)) {
@@ -794,6 +798,8 @@ public abstract class AbstractQueuedSynchronizer
      * @return {@code true} if thread should block
      */
     private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
+        // Acquire失败以后是否需要挂起，true：需要-false：不需要
+        // 针对ReentrantLock，这里指挥判断SIGNAL
         int ws = pred.waitStatus;
         if (ws == Node.SIGNAL)
             /*
@@ -801,6 +807,7 @@ public abstract class AbstractQueuedSynchronizer
              * to signal it, so it can safely park.
              */
             return true;
+        // ws > 0  =  CANCELLED
         if (ws > 0) {
             /*
              * Predecessor was cancelled. Skip over predecessors and
@@ -860,14 +867,16 @@ public abstract class AbstractQueuedSynchronizer
         try {
             boolean interrupted = false;
             for (;;) {
-                // 获取node的前驱节点
+                // 如果当前节点的前置节点是头节点，则意味着本次入队操作是第一次
                 final Node p = node.predecessor();
+                    // 如果是第一次入队，则再次尝试获取state
                 if (p == head && tryAcquire(arg)) {
                     setHead(node);
                     p.next = null; // help GC
                     failed = false;
                     return interrupted;
                 }
+                    // 非第一次入队/第一次入对的第二次循环
                 if (shouldParkAfterFailedAcquire(p, node) &&
                     parkAndCheckInterrupt())
                     interrupted = true;
