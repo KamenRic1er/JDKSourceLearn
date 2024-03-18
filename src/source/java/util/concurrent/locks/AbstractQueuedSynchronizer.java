@@ -799,7 +799,7 @@ public abstract class AbstractQueuedSynchronizer
      */
     private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
         // Acquire失败以后是否需要挂起，true：需要-false：不需要
-        // 针对ReentrantLock，这里指挥判断SIGNAL
+        // 针对ReentrantLock，这里只会判断SIGNAL
         int ws = pred.waitStatus;
         if (ws == Node.SIGNAL)
             /*
