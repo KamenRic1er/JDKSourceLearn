@@ -717,20 +717,26 @@ class Thread implements Runnable {
          *
          * A zero status value corresponds to state "NEW".
          */
+
+        // 判断线程状态是否合法，0->NEW，只有新建状态的线程才被允许调用start方法
         if (threadStatus != 0)
             throw new IllegalThreadStateException();
 
         /* Notify the group that this thread is about to be started
          * so that it can be added to the group's list of threads
          * and the group's unstarted count can be decremented. */
+
+        // 通知group该线程即将启动，group的未启动线程数量减1
         group.add(this);
 
         boolean started = false;
         try {
+            // 调用native的start0()方法 启动线程，启动后执行run()方法
             start0();
             started = true;
         } finally {
             try {
+                //启动不成功，group设置当前线程启动失败
                 if (!started) {
                     group.threadStartFailed(this);
                 }
@@ -741,6 +747,7 @@ class Thread implements Runnable {
         }
     }
 
+    // 这是个本地方法，猜一猜都能知道肯定是调用C++的方法创建新线程
     private native void start0();
 
     /**
