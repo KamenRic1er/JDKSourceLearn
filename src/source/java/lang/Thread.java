@@ -931,6 +931,11 @@ class Thread implements Runnable {
      * @revised 6.0
      * @spec JSR-51
      */
+
+    /**
+     * 请求终止线程。interrupt不会真正停止一个线程，它仅仅是给这个线程发了一个信号，
+     * 告诉它要结束了，具体要中断还是继续运行，将由被通知的线程自己处理
+     */
     public void interrupt() {
         if (this != Thread.currentThread())
             checkAccess();
@@ -938,6 +943,7 @@ class Thread implements Runnable {
         synchronized (blockerLock) {
             Interruptible b = blocker;
             if (b != null) {
+                // 设置中断标识
                 interrupt0();           // Just to set the interrupt flag
                 b.interrupt(this);
                 return;
