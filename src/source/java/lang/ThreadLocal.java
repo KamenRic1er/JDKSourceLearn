@@ -509,34 +509,31 @@ public class ThreadLocal<T> {
 
             Entry[] tab = table;
             int len = tab.length;
-            // 获取 hash 值，用于数组中的下标
+            // 通过哈希计算获取对应槽位的下标
             int i = key.threadLocalHashCode & (len-1);
 
-            // 从下标i开始遍历tab数组，只有当当前Entry对象（tab[i]）不为null才进入循环
-            // 只有找到所要找的Entry对象（key相等），或者当前Entry对象的k为null才会跳出循环，否则会调用nextIndex()方法访问下一个槽位
+            // 1.通过哈希计算后的槽位对应的Entry数据为空，走第四种情况对应的相同逻辑
             for (Entry e = tab[i];
+                 // 这个循环条件非常关键，一开始没有进入循环和进入循环后不满足条件跳出循环是两种情况
                  e != null;
                  e = tab[i = nextIndex(i, len)]) {
 
-                // 第一次进入循环，如果当前槽位的Entry对象不为null则获得Entry中的Key
                 ThreadLocal<?> k = e.get();
 
-                // k相等的情况下，则覆盖值，并跳出循环
+                // 2.槽位对应的Entry不为空，并且key相等
                 if (k == key) {
                     e.value = value;
                     return;
                 }
 
-                // 此时说明此处 Entry 的 k 中的对象实例已经被回收了，需要替换掉这个位置的 key 和 value
+                // 3.槽位对应的Entry不为空，但是该Entry的key为null
                 if (k == null) {
-                    // 能调用该方法意味着，当前槽位的Entry对象不为null，该Entry的key为null，意味着过期了
                     replaceStaleEntry(key, value, i);
                     return;
                 }
             }
 
-            // 在tab中没有找到key相等的Entry
-            // 创建 Entry 对象
+            // 4.对应的槽位的Entry不为空，并且该Entry的key不相等，通过线性探测法一直向后扫描一直没有遇到key为null的Entry，知道遇见Entry为null的槽位停下
             tab[i] = new Entry(key, value);
             int sz = ++size;
 
