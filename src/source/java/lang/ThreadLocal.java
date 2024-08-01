@@ -537,7 +537,8 @@ public class ThreadLocal<T> {
             tab[i] = new Entry(key, value);
             int sz = ++size;
 
-            // 启发式清除过期数据，如果未清理到任何数据则返回false，并判断size是否已经超过了扩容阈值
+            // 启发式清除过期数据，如果未清理到任何数据则返回false，并判断size是否已经超过了扩容阈值，达到以后则进行一次reHash()
+            // reHash实际上还是进行一次探测式清楚，并且清除完以后，会Entry数组的size（不是length）判断是否需要进行扩容
             if (!cleanSomeSlots(i, sz) && sz >= threshold)
                 rehash();
         }
@@ -731,6 +732,7 @@ public class ThreadLocal<T> {
          */
         // 启发式清理
         private boolean cleanSomeSlots(int i, int n) {
+            // 标记是否有过期Entry被清除
             boolean removed = false;
             Entry[] tab = table;
             int len = tab.length;
