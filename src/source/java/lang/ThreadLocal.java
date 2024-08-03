@@ -459,7 +459,6 @@ public class ThreadLocal<T> {
          */
         // 根据key获取对应的Entry
         private Entry getEntry(ThreadLocal<?> key) {
-            // 桶位路由规则： ThreadLocal.threadLocalHashCode & (table.length - 1) ==> index
             int i = key.threadLocalHashCode & (table.length - 1);
             Entry e = table[i];
             if (e != null && e.get() == key)
