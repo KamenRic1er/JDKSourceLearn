@@ -459,7 +459,6 @@ public class ThreadLocal<T> {
          */
         // 根据key获取对应的Entry
         private Entry getEntry(ThreadLocal<?> key) {
-            // 桶位路由规则： ThreadLocal.threadLocalHashCode & (table.length - 1) ==> index
             int i = key.threadLocalHashCode & (table.length - 1);
             Entry e = table[i];
             if (e != null && e.get() == key)
@@ -509,38 +508,36 @@ public class ThreadLocal<T> {
 
             Entry[] tab = table;
             int len = tab.length;
-            // 获取 hash 值，用于数组中的下标
+            // 通过哈希计算获取对应槽位的下标
             int i = key.threadLocalHashCode & (len-1);
 
-            // 从下标i开始遍历tab数组，只有当当前Entry对象（tab[i]）不为null才进入循环
-            // 只有找到所要找的Entry对象（key相等），或者当前Entry对象的k为null才会跳出循环，否则会调用nextIndex()方法访问下一个槽位
+            // 1.通过哈希计算后的槽位对应的Entry数据为空，走第四种情况对应的相同逻辑
             for (Entry e = tab[i];
+                 // 这个循环条件非常关键，一开始没有进入循环和进入循环后不满足条件跳出循环是两种情况
                  e != null;
                  e = tab[i = nextIndex(i, len)]) {
 
-                // 第一次进入循环，如果当前槽位的Entry对象不为null则获得Entry中的Key
                 ThreadLocal<?> k = e.get();
 
-                // k相等的情况下，则覆盖值，并跳出循环
+                // 2.槽位对应的Entry不为空，并且key相等
                 if (k == key) {
                     e.value = value;
                     return;
                 }
 
-                // 此时说明此处 Entry 的 k 中的对象实例已经被回收了，需要替换掉这个位置的 key 和 value
+                // 3.槽位对应的Entry不为空，但是该Entry的key为null
                 if (k == null) {
-                    // 能调用该方法意味着，当前槽位的Entry对象不为null，该Entry的key为null，意味着过期了
                     replaceStaleEntry(key, value, i);
                     return;
                 }
             }
 
-            // 在tab中没有找到key相等的Entry
-            // 创建 Entry 对象
+            // 4.对应的槽位的Entry不为空，并且该Entry的key不相等，通过线性探测法一直向后扫描，直到遇见Entry为null的槽位停下，创建新的Entry
             tab[i] = new Entry(key, value);
             int sz = ++size;
 
-            // 启发式清除过期数据，如果未清理到任何数据则返回false，并判断size是否已经超过了扩容阈值
+            // 启发式清除过期数据，如果未清理到任何数据则返回false，并判断size是否已经超过了扩容阈值，达到以后则进行一次reHash()
+            // reHash实际上还是进行一次探测式清楚，并且清除完以后，会Entry数组的size（不是length）判断是否需要进行扩容
             if (!cleanSomeSlots(i, sz) && sz >= threshold)
                 rehash();
         }
@@ -584,58 +581,55 @@ public class ThreadLocal<T> {
             int len = tab.length;
             Entry e;
 
-            // 从当前的staleSlot向前遍历 i--;
-            // 为了把前面所有的已经被垃圾回收的也一起是放空间出来
-            // 这里只key被回收，value还没被回收，entry更加没回收，所以需要让他们回收
-            // 同时也避免这样存在很多过期的对象占用，导致这个时候刚好来了一个新元素达到阈值而触发一次心的rehash
+            // 从当前的staleSlot向前遍历，查找其他过期的数据（key为null的Entry），不断地更新过期数据起始扫描下标slotToExpunge，直到遇到为null的Entry停下
             // Back up to check for prior stale entry in current run.
             // We clean out whole runs at a time to avoid continual
             // incremental rehashing due to garbage collector freeing
             // up refs in bunches (i.e., whenever the collector runs).
+            // 循环一
             int slotToExpunge = staleSlot;
             for (int i = prevIndex(staleSlot, len);
                  (e = tab[i]) != null;
-                 i = prevIndex(i, len))
+                 i = prevIndex(i, len)) {
                 if (e.get() == null)
                     slotToExpunge = i;
+            }
 
-            // 这个时候是从数据下标小的往下标大的方向遍历，i++刚好跟上面相反
-            // 这两个遍历为了在左边遇到第一个空的entry到右边遇到第一个空的entry之间查询所有过期的对象
-            // 在右边如果找到需要设置值的key 相同的时候开始清理，然后返回，不再继续遍历
+            // 从当前staleSlot向后查找key值相等的Entry元素
+            // (1)如果找到则更新并将其替换到staleSlot的位置，
+            // (2)如果直到遇到一个为null的Entry，还没有找到对应的key相等的Entry，则创建一个新的Entry放到staleSlot的位置
             // Find either the key or trailing null slot of run, whichever
             // occurs first
+            // 循环二
             for (int i = nextIndex(staleSlot, len);
                  (e = tab[i]) != null;
                  i = nextIndex(i, len)) {
                 ThreadLocal<?> k = e.get();
 
+
+                // 3.1 如果找到key相等的Entry元素，则覆盖值，并且将该Entry替换到staleSlot的位置
                 // If we find key, then we need to swap it
                 // with the stale entry to maintain hash table order.
                 // The newly stale slot, or any other stale slot
                 // encountered above it, can then be sent to expungeStaleEntry
                 // to remove or rehash all of the other entries in run.
-                // 说明之前已经存在相同的key，所以需要替换旧的值并且和前面那个过期的Entry交换位置
                 if (k == key) {
                     e.value = value;
 
                     tab[i] = tab[staleSlot];
                     tab[staleSlot] = e;
 
-                    // 前面的第一个for循环(i--)往前查找的时候没有找到的过期的，只有taleSlot
-                    // 这个过期由于前面过期的对象已经通过交换位置的方式到index=i上了，所以需要清理i，而不是staleslot
+                    // 经历第一个循环以后，如果slotToExpunge == staleSlot仍然成立，那么意味着当前下标staleSlot前后都没有过期的Entry，直接开始清除操作
+                    // 在这里就直接结束了该方法的执行
                     // Start expunge at preceding stale entry if it exists
                     if (slotToExpunge == staleSlot)
                         slotToExpunge = i;
-                    // 清理过期数据
                     cleanSomeSlots(expungeStaleEntry(slotToExpunge), len);
                     return;
                 }
 
-                // 如果在第一个for循环(i--)向前遍历无任何过期对象
-                // 那么我们需要把slotToExpunge设置为后遍历(i++)的第一个过期对象的位置
-                // 如果整个数组都没找到要设置的key的时候，该key会设置在该staleslot的位置上
-                // 如果数组中存在要设置的key,那么上面也会通过交换位置的时候把有效值设置到staleSlot位置上
-                // 综上: staleSlot存放的是有效值，不需要被清理
+
+                // key == null并且slotToExpunge == staleSlot意味着第一轮循环并没有找到这个过期数据，这个时候将slotToExpunge指向当前下标
                 // If we didn't find stale entry on backward scan, the
                 // first stale entry seen while scanning for key is the
                 // first still present in the run.
@@ -643,7 +637,7 @@ public class ThreadLocal<T> {
                     slotToExpunge = i;
             }
 
-            // 如果key 在数组中不存在，则新建一个放进去
+            // 3.2 如果上面的循环直到遇到了为null的Entry，仍然没有找到对应的key相等的Entry，意味着以该ThreadLocal为key的Entry不存在于数组中，则新建一个放进去
             // If key not found, put new entry in stale slot
             tab[staleSlot].value = null;
             tab[staleSlot] = new Entry(key, value);
@@ -665,29 +659,36 @@ public class ThreadLocal<T> {
          * (all between staleSlot and this slot will have been checked
          * for expunging).
          */
+        // 探测式清理
         private int expungeStaleEntry(int staleSlot) {
             Entry[] tab = table;
             int len = tab.length;
 
+            // 将staleSlot位置的过期Entry置为null
             // expunge entry at staleSlot
             tab[staleSlot].value = null;
             tab[staleSlot] = null;
             size--;
 
+
             // Rehash until we encounter null
             Entry e;
             int i;
+            // 以staleSlot为起始下标，向后扫描，直到遇到为null的Entry停止扫描
             for (i = nextIndex(staleSlot, len);
                  (e = tab[i]) != null;
                  i = nextIndex(i, len)) {
                 ThreadLocal<?> k = e.get();
+
+                // （1）如果遇到过期Entry，将其置为null
                 if (k == null) {
                     e.value = null;
                     tab[i] = null;
                     size--;
+                // （2）如果未过期的Entry，将其进行哈希计算，如果是因为开放地址法向后移动的Entry，则将其重新放回对应的位置
                 } else {
-                    // 采用开放地址法，删除的元素是多个冲突元素重的一个，需要对后面的元素做处理(让后面元素往前移动)，这么做，住要是开放地址法寻找元素的时候，
-                    // 遇到null就停止熏着了，你前面key=null的时候已经设置entery为null，不移动后面的元素永远访问不了
+                    // ThreadLocalMap采用开放地址法解决哈希冲突，删除的过期元素是多个冲突元素重的一个，删除以后需要将冲突的元素向前挪动，
+                    // 这么做的目的是通过开放地址法寻找元素的时候，避免遇到null就停止寻找了，前面key=null的Entry已经被置为null，如果不移动的话后面的元素就无法被访问
                     int h = k.threadLocalHashCode & (len - 1);
                     // 不相等说明hash是有冲突的
                     if (h != i) {
@@ -728,7 +729,9 @@ public class ThreadLocal<T> {
          *
          * @return true if any stale entries have been removed.
          */
+        // 启发式清理
         private boolean cleanSomeSlots(int i, int n) {
+            // 标记是否有过期Entry被清除
             boolean removed = false;
             Entry[] tab = table;
             int len = tab.length;

@@ -14,6 +14,7 @@ public class HashMapTest {
         for(int i = 0; i < 18; i++){
             map.put(i, String.valueOf(i));
         }
+        System.out.println("hello world!");
     }
 
 }
